@@ -20,7 +20,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)lib_$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)lib_$(PlatformName)"
 			IntermediateDirectory="_MSVC_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -43,14 +43,14 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SDL_EXTERN)/src/wxwidgets/tiff&quot;"
+				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SolutionDir)../sdlExtern/include/wx/tiff&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="1"
 			/>
 			<Tool
@@ -64,6 +64,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\$(ProjectName)-d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -84,7 +85,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug|x64"
-			OutputDirectory="$(SolutionDir)lib_$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)lib_$(PlatformName)"
 			IntermediateDirectory="_MSVC_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -108,7 +109,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SDL_EXTERN)/src/wxwidgets/tiff&quot;"
+				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SolutionDir)../sdlExtern/include/wx/tiff&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
@@ -129,6 +130,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\$(ProjectName)-d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -149,7 +151,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)lib_$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)lib_$(PlatformName)"
 			IntermediateDirectory="_MSVC_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -172,12 +174,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SDL_EXTERN)/src/wxwidgets/tiff&quot;"
+				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SolutionDir)../sdlExtern/include/wx/tiff&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="0"
 			/>
 			<Tool
@@ -191,6 +193,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\$(ProjectName)-s.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -211,7 +214,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|x64"
-			OutputDirectory="$(SolutionDir)lib_$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)lib_$(PlatformName)"
 			IntermediateDirectory="_MSVC_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -235,7 +238,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SDL_EXTERN)/src/wxwidgets/tiff&quot;"
+				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SolutionDir)../sdlExtern/include/wx/tiff&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -254,6 +257,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\$(ProjectName)-s.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -274,7 +278,7 @@
 		</Configuration>
 		<Configuration
 			Name="ReleaseDLL|Win32"
-			OutputDirectory="$(SolutionDir)lib_$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)lib_$(PlatformName)"
 			IntermediateDirectory="_MSVC_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -297,12 +301,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SDL_EXTERN)/src/wxwidgets/tiff&quot;"
+				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SolutionDir)../sdlExtern/include/wx/tiff&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="0"
 			/>
 			<Tool
@@ -336,7 +340,7 @@
 		</Configuration>
 		<Configuration
 			Name="ReleaseDLL|x64"
-			OutputDirectory="$(SolutionDir)lib_$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)lib_$(PlatformName)"
 			IntermediateDirectory="_MSVC_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
@@ -360,7 +364,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SDL_EXTERN)/src/wxwidgets/tiff&quot;"
+				AdditionalIncludeDirectories="./;./libxtiff;&quot;$(SolutionDir)../sdlExtern/include/wx/tiff&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
