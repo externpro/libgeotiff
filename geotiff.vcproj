@@ -80,7 +80,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="cd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;copy $(ProjectDir)*.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)libxtiff\xtiffio.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)*.inc include\geotiff&#x0D;&#x0A;:theend&#x0D;&#x0A;"
+				CommandLine="REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn&apos;t work)&#x0D;&#x0A;pushd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;REM triple quotes for case where $(ProjectDir) is a UNC path with spaces&#x0D;&#x0A;pushd include\geotiff&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)libxtiff\xtiffio.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.inc&quot;&quot;&quot;&#x0D;&#x0A;popd&#x0D;&#x0A;:theend&#x0D;&#x0A;popd"
 			/>
 		</Configuration>
 		<Configuration
@@ -146,7 +146,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="cd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;copy $(ProjectDir)*.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)libxtiff\xtiffio.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)*.inc include\geotiff&#x0D;&#x0A;:theend&#x0D;&#x0A;"
+				CommandLine="REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn&apos;t work)&#x0D;&#x0A;pushd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;REM triple quotes for case where $(ProjectDir) is a UNC path with spaces&#x0D;&#x0A;pushd include\geotiff&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)libxtiff\xtiffio.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.inc&quot;&quot;&quot;&#x0D;&#x0A;popd&#x0D;&#x0A;:theend&#x0D;&#x0A;popd"
 			/>
 		</Configuration>
 		<Configuration
@@ -209,7 +209,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="cd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;copy $(ProjectDir)*.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)libxtiff\xtiffio.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)*.inc include\geotiff&#x0D;&#x0A;:theend&#x0D;&#x0A;"
+				CommandLine="REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn&apos;t work)&#x0D;&#x0A;pushd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;REM triple quotes for case where $(ProjectDir) is a UNC path with spaces&#x0D;&#x0A;pushd include\geotiff&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)libxtiff\xtiffio.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.inc&quot;&quot;&quot;&#x0D;&#x0A;popd&#x0D;&#x0A;:theend&#x0D;&#x0A;popd"
 			/>
 		</Configuration>
 		<Configuration
@@ -273,7 +273,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="cd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;copy $(ProjectDir)*.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)libxtiff\xtiffio.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)*.inc include\geotiff&#x0D;&#x0A;:theend&#x0D;&#x0A;"
+				CommandLine="REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn&apos;t work)&#x0D;&#x0A;pushd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;REM triple quotes for case where $(ProjectDir) is a UNC path with spaces&#x0D;&#x0A;pushd include\geotiff&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)libxtiff\xtiffio.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.inc&quot;&quot;&quot;&#x0D;&#x0A;popd&#x0D;&#x0A;:theend&#x0D;&#x0A;popd"
 			/>
 		</Configuration>
 		<Configuration
@@ -335,7 +335,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="cd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;copy $(ProjectDir)*.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)libxtiff\xtiffio.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)*.inc include\geotiff&#x0D;&#x0A;:theend&#x0D;&#x0A;"
+				CommandLine="REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn&apos;t work)&#x0D;&#x0A;pushd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;REM triple quotes for case where $(ProjectDir) is a UNC path with spaces&#x0D;&#x0A;pushd include\geotiff&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)libxtiff\xtiffio.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.inc&quot;&quot;&quot;&#x0D;&#x0A;popd&#x0D;&#x0A;:theend&#x0D;&#x0A;popd"
 			/>
 		</Configuration>
 		<Configuration
@@ -398,7 +398,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="cd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;copy $(ProjectDir)*.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)libxtiff\xtiffio.h include\geotiff&#x0D;&#x0A;copy $(ProjectDir)*.inc include\geotiff&#x0D;&#x0A;:theend&#x0D;&#x0A;"
+				CommandLine="REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn&apos;t work)&#x0D;&#x0A;pushd $(SolutionDir)&#x0D;&#x0A;if exist include\geotiff goto theend&#x0D;&#x0A;mkdir include\geotiff&#x0D;&#x0A;echo &quot;Copying file(s) into include\geotiff&quot;&#x0D;&#x0A;REM triple quotes for case where $(ProjectDir) is a UNC path with spaces&#x0D;&#x0A;pushd include\geotiff&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)libxtiff\xtiffio.h&quot;&quot;&quot;&#x0D;&#x0A;copy &quot;&quot;&quot;$(ProjectDir)*.inc&quot;&quot;&quot;&#x0D;&#x0A;popd&#x0D;&#x0A;:theend&#x0D;&#x0A;popd"
 			/>
 		</Configuration>
 	</Configurations>
