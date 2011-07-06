@@ -97,6 +97,10 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|Win32'">_MSVC_$(Platform)_$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">$(SolutionDir)lib_$(Platform)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">_MSVC_$(Platform)_$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)-s</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectName)-s</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)-d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectName)-d</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,6 +117,7 @@
     </ClCompile>
     <Lib>
       <OutputFile>$(OutDir)$(ProjectName)-d.lib</OutputFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
     <PostBuildEvent>
       <Command>REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn%27t work)
@@ -137,7 +142,7 @@ popd</Command>
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>./;./libxtiff;$(SolutionDir)../sdlExtern/include/wx/tiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN64;_DEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -148,6 +153,7 @@ popd</Command>
     </ClCompile>
     <Lib>
       <OutputFile>$(OutDir)$(ProjectName)-d.lib</OutputFile>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
     <PostBuildEvent>
       <Command>REM pushd works for case where $(SolutionDir) is a UNC path (cd doesn%27t work)
@@ -201,7 +207,7 @@ popd</Command>
     </Midl>
     <ClCompile>
       <AdditionalIncludeDirectories>./;./libxtiff;$(SolutionDir)../sdlExtern/include/wx/tiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN64;NDEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_LIB;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
