@@ -3,8 +3,9 @@ set(lib_name geotiff)
 # preprocessor
 if(MSVC)
   add_definitions(
+    -D_CRT_NONSTDC_NO_DEPRECATE
     -D_CRT_SECURE_NO_WARNINGS
-  )
+    )
 endif()
 #######################################
 # include directories
@@ -12,7 +13,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
   ${CMAKE_CURRENT_SOURCE_DIR}/../../sdlExtern/include/wx/tiff
-)
+  )
 #######################################
 # library sources
 set(${lib_name}_libsrcs
@@ -43,8 +44,7 @@ set(${lib_name}_libsrcs
   geotiff_proj4.c
   libxtiff/xtiff.c
   libxtiff/xtiffio.h
-)
+  )
 #######################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
-
