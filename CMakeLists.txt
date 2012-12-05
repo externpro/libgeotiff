@@ -1,3 +1,6 @@
+cmake_minimum_required(VERSION 2.8.5)
+project(geotiff)
+include(flags OPTIONAL)
 set(lib_name geotiff)
 #######################################
 # preprocessor
@@ -12,7 +15,7 @@ endif()
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
-  ${CMAKE_CURRENT_SOURCE_DIR}/../../sdlExtern/include/wx/tiff
+  ${CMAKE_CURRENT_SOURCE_DIR}/../Vantage/sdlExtern/msw/include/wx/tiff #TODO: fix this
   )
 #######################################
 # library sources
@@ -48,3 +51,10 @@ set(${lib_name}_libsrcs
 #######################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
+#######################################
+# install
+install(TARGETS ${lib_name} DESTINATION lib${NUMBITS})
+file(GLOB hdrs ${CMAKE_SOURCE_DIR}/*.h)
+file(GLOB incs ${CMAKE_SOURCE_DIR}/*.inc)
+install(FILES ${hdrs} ${incs} ${CMAKE_SOURCE_DIR}/libxtiff/xtiffio.h
+  DESTINATION include/geotiff)
