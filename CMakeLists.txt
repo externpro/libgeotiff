@@ -15,7 +15,6 @@ endif()
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
-  ${CMAKE_CURRENT_SOURCE_DIR}/../Vantage/sdlExtern/msw/include/wx/tiff #TODO: fix this
   )
 #######################################
 # library sources
