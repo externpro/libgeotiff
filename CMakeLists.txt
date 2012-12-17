@@ -15,6 +15,8 @@ endif()
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
+  # TRICKY: currently relies on tiff headers from wxWidgets...
+  ${CMAKE_INSTALL_PREFIX}/include # find wx/tiff/tiffio.h
   )
 #######################################
 # library sources
