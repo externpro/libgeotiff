@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.5)
+cmake_minimum_required(VERSION 2.8.10)
 project(geotiff)
 include(flags OPTIONAL)
 set(lib_name geotiff)
@@ -16,7 +16,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
   # TRICKY: currently relies on tiff headers from wxWidgets...
-  ${CMAKE_INSTALL_PREFIX}/include # find wx/tiff/tiffio.h
+  ${CMAKE_INSTALL_PREFIX}/include/wx/tiff
   )
 #######################################
 # library sources

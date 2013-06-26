@@ -7,7 +7,7 @@
 #ifndef __xtiffio_h
 #define __xtiffio_h
 
-#include <wx/tiff/tiffio.h>
+#include "tiffio.h"
 #include "geo_config.h"
 
 /**
