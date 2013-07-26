@@ -16,8 +16,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
   # TRICKY: currently relies on tiff headers from wxWidgets...
-  ${CMAKE_INSTALL_PREFIX}/include/wx/tiff
-  ${WX_INCLUDE}/tiff # pass in with -DWX_INCLUDE
+  ${WX_INCLUDE}/wx/tiff # pass in with -DWX_INCLUDE
   )
 #######################################
 # library sources
