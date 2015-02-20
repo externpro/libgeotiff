@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.0)
 project(geotiff)
 include(flags OPTIONAL)
 set(lib_name geotiff)
@@ -54,8 +54,14 @@ set(${lib_name}_libsrcs
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
 #######################################
 # install
-install(TARGETS ${lib_name} DESTINATION lib${NUMBITS})
+install(TARGETS ${lib_name} EXPORT ${PROJECT_NAME}-targets
+  RUNTIME DESTINATION bin${NUMBITS}
+  LIBRARY DESTINATION lib${NUMBITS}
+  ARCHIVE DESTINATION lib${NUMBITS}
+  )
 file(GLOB hdrs ${CMAKE_SOURCE_DIR}/*.h)
 file(GLOB incs ${CMAKE_SOURCE_DIR}/*.inc)
 install(FILES ${hdrs} ${incs} ${CMAKE_SOURCE_DIR}/libxtiff/xtiffio.h
   DESTINATION include/geotiff)
+install(FILES usexp-${PROJECT_NAME}-config.cmake DESTINATION share/cmake)
+install(EXPORT ${PROJECT_NAME}-targets DESTINATION lib${NUMBITS}/cmake)
