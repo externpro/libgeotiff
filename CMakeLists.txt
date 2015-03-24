@@ -63,5 +63,4 @@ file(GLOB hdrs ${CMAKE_SOURCE_DIR}/*.h)
 file(GLOB incs ${CMAKE_SOURCE_DIR}/*.inc)
 install(FILES ${hdrs} ${incs} ${CMAKE_SOURCE_DIR}/libxtiff/xtiffio.h
   DESTINATION include/geotiff)
-install(FILES usexp-${PROJECT_NAME}-config.cmake DESTINATION share/cmake)
 install(EXPORT ${PROJECT_NAME}-targets DESTINATION lib${NUMBITS}/cmake)
