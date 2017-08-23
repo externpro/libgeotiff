@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(geotiff)
 include(flags OPTIONAL)
-set(lib_name geotiff)
+set(lib_name ${PROJECT_NAME})
 #######################################
 # preprocessor
 if(MSVC)
@@ -50,11 +50,29 @@ set(${lib_name}_libsrcs
   libxtiff/xtiffio.h
   )
 #######################################
+# version
+foreach(TYPE MAJOR MINOR POINT)
+  set(verString "^VERSION_${TYPE}=+([0-9]+)?")
+  set(verFile configure.in)
+  file(STRINGS ${verFile} verNum REGEX "${verString}")
+  string(REGEX REPLACE "${verString}" "\\1" ver${TYPE} ${verNum})
+endforeach()
+set(GTIF_VER ${verMAJOR}.${verMINOR}.${verPOINT})
+if(NOT DEFINED GEOTIFF_VER)
+  set(GEOTIFF_VER ${GTIF_VER})
+elseif(NOT ${GEOTIFF_VER} STREQUAL ${GTIF_VER})
+  message(AUTHOR_WARNING "version passed in (${GEOTIFF_VER}) doesn't match version from ${verFile} (${GTIF_VER})")
+endif()
+set(ver _${GEOTIFF_VER})
+set(verDir /${PROJECT_NAME}${ver})
+#######################################
 # library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
+set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 #######################################
 # install
-install(TARGETS ${lib_name} EXPORT ${PROJECT_NAME}-targets
+set(targetsFile ${PROJECT_NAME}${ver}-targets)
+install(TARGETS ${lib_name} EXPORT ${targetsFile}
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
@@ -62,5 +80,5 @@ install(TARGETS ${lib_name} EXPORT ${PROJECT_NAME}-targets
 file(GLOB hdrs ${CMAKE_SOURCE_DIR}/*.h)
 file(GLOB incs ${CMAKE_SOURCE_DIR}/*.inc)
 install(FILES ${hdrs} ${incs} ${CMAKE_SOURCE_DIR}/libxtiff/xtiffio.h
-  DESTINATION include/geotiff)
-install(EXPORT ${PROJECT_NAME}-targets DESTINATION lib/cmake)
+  DESTINATION include${verDir}/${PROJECT_NAME})
+install(EXPORT ${targetsFile} DESTINATION lib/cmake)
