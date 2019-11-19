@@ -1,25 +1,8 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 project(geotiff)
 include(flags OPTIONAL)
 set(lib_name ${PROJECT_NAME})
 #######################################
-# preprocessor
-if(MSVC)
-  add_definitions(
-    -D_CRT_NONSTDC_NO_DEPRECATE
-    -D_CRT_SECURE_NO_WARNINGS
-    )
-endif()
-#######################################
-# include directories
-include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
-  # TRICKY: currently relies on tiff headers from wxWidgets...
-  ${WX_INCLUDE}/wx/tiff # pass in with -DWX_INCLUDE
-  )
-#######################################
-# library sources
 set(${lib_name}_libsrcs
   defs.h
   geo_config.h
@@ -50,7 +33,6 @@ set(${lib_name}_libsrcs
   libxtiff/xtiffio.h
   )
 #######################################
-# version
 foreach(TYPE MAJOR MINOR POINT)
   set(verString "^VERSION_${TYPE}=+([0-9]+)?")
   set(verFile configure.in)
@@ -66,11 +48,24 @@ endif()
 set(ver _${GEOTIFF_VER})
 set(verDir /${PROJECT_NAME}${ver})
 #######################################
-# library
 add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
+if(MSVC)
+  target_compile_definitions(${lib_name} PRIVATE
+    -D_CRT_NONSTDC_NO_DEPRECATE
+    -D_CRT_SECURE_NO_WARNINGS
+    )
+endif()
+string(REPLACE "${CMAKE_INSTALL_PREFIX}/" "" wxtiff ${WX_INCLUDE}/wx/tiff)
+target_include_directories(${lib_name} PUBLIC $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}>
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${wxtiff}>
+  PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
+  # TRICKY: currently relies on tiff headers from wxWidgets...
+  ${WX_INCLUDE}/wx/tiff # pass in with -DWX_INCLUDE
+  )
 set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME ${lib_name}${ver})
 #######################################
-# install
 set(targetsFile ${PROJECT_NAME}${ver}-targets)
 install(TARGETS ${lib_name} EXPORT ${targetsFile}
   RUNTIME DESTINATION bin
@@ -81,4 +76,7 @@ file(GLOB hdrs ${CMAKE_SOURCE_DIR}/*.h)
 file(GLOB incs ${CMAKE_SOURCE_DIR}/*.inc)
 install(FILES ${hdrs} ${incs} ${CMAKE_SOURCE_DIR}/libxtiff/xtiffio.h
   DESTINATION include${verDir}/${PROJECT_NAME})
-install(EXPORT ${targetsFile} DESTINATION lib/cmake)
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+endif()
+install(EXPORT ${targetsFile} DESTINATION lib/cmake ${nameSpace})
