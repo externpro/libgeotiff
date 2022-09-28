@@ -49,14 +49,13 @@ if(MSVC)
     -D_CRT_SECURE_NO_WARNINGS
     )
 endif()
-string(REPLACE "${CMAKE_INSTALL_PREFIX}/" "" wxtiff ${WX_INCLUDE}/wx/tiff)
 target_include_directories(${lib_name} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${wxtiff}>
+  $<INSTALL_INTERFACE:${WX_INCLUDE}/wx/tiff>
   PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
   # TRICKY: currently relies on tiff headers from wxWidgets...
-  ${WX_INCLUDE}/wx/tiff # pass in with -DWX_INCLUDE
+  ${CMAKE_INSTALL_PREFIX}/${WX_INCLUDE}/wx/tiff # pass in with -DWX_INCLUDE
   )
 #######################################
 set(targetsFile ${PROJECT_NAME}-targets)
