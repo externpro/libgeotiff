@@ -1,0 +1,20 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      workflow_run_url:
+        description: 'URL of the workflow run containing artifacts to upload (e.g., https://github.com/owner/repo/actions/runs/123456789)'
+        required: true
+        type: string
+jobs:
+  # Upload build artifacts as release assets
+  release-from-build:
+    uses: externpro/externpro/.github/workflows/release-from-build.yml@25.05.2
+    with:
+      workflow_run_url: ${{ github.event.inputs.workflow_run_url }}
+      artifact_pattern: "*.tar.xz"
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    secrets: inherit
