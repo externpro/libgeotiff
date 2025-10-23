@@ -1,0 +1,80 @@
+set(lib_name ${PROJECT_NAME})
+#######################################
+set(${lib_name}_libsrcs
+  defs.h
+  geo_config.h
+  geo_keyp.h
+  geokeys.h
+  geonames.h
+  geotiff.h
+  geotiffio.h
+  geovalues.h
+  cpl_csv.c
+  cpl_serv.c
+  cpl_serv.h
+  geo_extra.c
+  geo_free.c
+  geo_get.c
+  geo_names.c
+  geo_new.c
+  geo_normalize.c
+  geo_normalize.h
+  geo_print.c
+  geo_set.c
+  geo_tiffp.c
+  geo_tiffp.h
+  geo_trans.c
+  geo_write.c
+  geotiff_proj4.c
+  libxtiff/xtiff.c
+  libxtiff/xtiffio.h
+  )
+#######################################
+foreach(TYPE MAJOR MINOR POINT)
+  set(verString "^VERSION_${TYPE}=+([0-9]+)?")
+  set(verFile configure.in)
+  file(STRINGS ${verFile} verNum REGEX "${verString}")
+  string(REGEX REPLACE "${verString}" "\\1" ver${TYPE} ${verNum})
+endforeach()
+set(GTIF_VER ${verMAJOR}.${verMINOR}.${verPOINT})
+#######################################
+add_library(${lib_name} STATIC ${${lib_name}_libsrcs})
+if(MSVC)
+  target_compile_definitions(${lib_name} PRIVATE
+    -D_CRT_NONSTDC_NO_DEPRECATE
+    -D_CRT_SECURE_NO_WARNINGS
+    )
+endif()
+target_include_directories(${lib_name} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/tiff>
+  PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
+  ${CMAKE_BINARY_DIR}/tiff
+  )
+set_target_properties(${lib_name} PROPERTIES
+  PREFIX "" # strip off the "lib" prefix, since it's already libgeotiff
+  )
+#######################################
+set(lib ${lib_name})
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+  string(PREPEND lib "${XP_NAMESPACE}::")
+endif()
+if(NOT DEFINED XP_INSTALL_CMAKEDIR)
+  set(XP_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATADIR}/cmake)
+endif()
+set(targetsFile ${PROJECT_NAME}-targets)
+xpPackageDevel(TARGETS_FILE ${targetsFile} LIBRARIES ${lib})
+install(TARGETS ${lib_name} EXPORT ${targetsFile}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  )
+file(GLOB hdrs ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+file(GLOB incs ${CMAKE_CURRENT_SOURCE_DIR}/*.inc)
+install(FILES ${hdrs} ${incs} ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff/xtiffio.h
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+  )
+install(FILES ${tiffHeaders} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tiff)
+install(EXPORT ${targetsFile} DESTINATION ${XP_INSTALL_CMAKEDIR} ${nameSpace})

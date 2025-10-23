@@ -260,8 +260,8 @@ static void PrintKey(GeoKey *key, GTIFPrintMethod print, void *aux)
 
 static void DefaultPrint(char *string, void *aux)
 {
-    /* Pretty boring */
-    fprintf((FILE *)aux,string);
+    /* Pretty boring but safe */
+    fputs(string, (FILE *)aux);
 }
 
 
