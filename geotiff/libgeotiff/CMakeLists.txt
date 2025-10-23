@@ -46,29 +46,35 @@ if(MSVC)
     )
 endif()
 target_include_directories(${lib_name} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-  $<INSTALL_INTERFACE:${WX_INCLUDE}/wx/tiff>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/tiff>
   PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
-  # TRICKY: currently relies on tiff headers from wxWidgets...
-  ${CMAKE_INSTALL_PREFIX}/${WX_INCLUDE}/wx/tiff # pass in with -DWX_INCLUDE
+  ${CMAKE_BINARY_DIR}/tiff
+  )
+set_target_properties(${lib_name} PROPERTIES
+  PREFIX "" # strip off the "lib" prefix, since it's already libgeotiff
   )
 #######################################
+set(lib ${lib_name})
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+  string(PREPEND lib "${XP_NAMESPACE}::")
+endif()
+if(NOT DEFINED XP_INSTALL_CMAKEDIR)
+  set(XP_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATADIR}/cmake)
+endif()
 set(targetsFile ${PROJECT_NAME}-targets)
+xpPackageDevel(TARGETS_FILE ${targetsFile} LIBRARIES ${lib})
 install(TARGETS ${lib_name} EXPORT ${targetsFile}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
-file(GLOB hdrs ${CMAKE_SOURCE_DIR}/*.h)
-file(GLOB incs ${CMAKE_SOURCE_DIR}/*.inc)
-install(FILES ${hdrs} ${incs} ${CMAKE_SOURCE_DIR}/libxtiff/xtiffio.h
+file(GLOB hdrs ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+file(GLOB incs ${CMAKE_CURRENT_SOURCE_DIR}/*.inc)
+install(FILES ${hdrs} ${incs} ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff/xtiffio.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
   )
-if(DEFINED XP_NAMESPACE)
-  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
-endif()
-if(NOT DEFINED XP_INSTALL_CMAKEDIR)
-  set(XP_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATADIR}/cmake)
-endif()
+install(FILES ${tiffHeaders} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tiff)
 install(EXPORT ${targetsFile} DESTINATION ${XP_INSTALL_CMAKEDIR} ${nameSpace})
