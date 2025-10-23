@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 3.31)
-project(geotiff)
-include(GNUInstallDirs)
-include(xpflags)
 set(lib_name ${PROJECT_NAME})
 #######################################
 set(${lib_name}_libsrcs
