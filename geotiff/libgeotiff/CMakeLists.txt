@@ -46,12 +46,9 @@ if(MSVC)
     )
 endif()
 target_include_directories(${lib_name} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/tiff>
-  PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
-  ${CMAKE_BINARY_DIR}/tiff
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
   )
+target_link_libraries(${lib_name} PUBLIC wx::wxtiff)
 set_target_properties(${lib_name} PROPERTIES
   PREFIX "" # strip off the "lib" prefix, since it's already libgeotiff
   )
@@ -65,7 +62,7 @@ if(NOT DEFINED XP_INSTALL_CMAKEDIR)
   set(XP_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATADIR}/cmake)
 endif()
 set(targetsFile ${PROJECT_NAME}-targets)
-xpPackageDevel(TARGETS_FILE ${targetsFile} LIBRARIES ${lib})
+xpPackageDevel(TARGETS_FILE ${targetsFile} DEPS wxwidgets LIBRARIES ${lib})
 install(TARGETS ${lib_name} EXPORT ${targetsFile}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -76,5 +73,4 @@ file(GLOB incs ${CMAKE_CURRENT_SOURCE_DIR}/*.inc)
 install(FILES ${hdrs} ${incs} ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff/xtiffio.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
   )
-install(FILES ${tiffHeaders} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tiff)
 install(EXPORT ${targetsFile} DESTINATION ${XP_INSTALL_CMAKEDIR} ${nameSpace})
