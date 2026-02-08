@@ -1,0 +1,12 @@
+name: xpUpdate externpro
+permissions:
+  contents: write
+  pull-requests: write
+  packages: read
+on:
+  workflow_dispatch:
+jobs:
+  update:
+    uses: externpro/externpro/.github/workflows/update-externpro.yml@main
+    secrets:
+      workflow_write_token: ${{ secrets.XPUPDATE_TOKEN }}
