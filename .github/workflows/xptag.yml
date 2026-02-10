@@ -1,0 +1,16 @@
+name: xpTag
+permissions:
+  contents: write
+  issues: write
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  tag:
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'xpro' && contains(github.event.pull_request.labels.*.name, 'release:tag') }}
+    uses: externpro/externpro/.github/workflows/tag-release.yml@25.07.6
+    with:
+      merge_sha: ${{ github.event.pull_request.merge_commit_sha }}
+      pr_number: ${{ github.event.pull_request.number }}
+    secrets:
+      workflow_write_token: ${{ secrets.XPUPDATE_TOKEN }}
