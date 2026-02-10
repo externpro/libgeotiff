@@ -1,12 +1,12 @@
-name: Build
+name: xpBuild
 permissions:
   contents: read
   pull-requests: write
 on:
   push:
-    branches: [ "dev" ]
+    tags: ["xpv*"]
   pull_request:
-    branches: [ "dev" ]
+    branches: ["xpro"]
   workflow_dispatch:
 jobs:
   linux:
@@ -14,11 +14,11 @@ jobs:
       contents: read
       pull-requests: write
       packages: write
-    uses: externpro/externpro/.github/workflows/build-linux.yml@25.07.3
+    uses: externpro/externpro/.github/workflows/build-linux.yml@25.07.6
     secrets: inherit
   macos:
-    uses: externpro/externpro/.github/workflows/build-macos.yml@25.07.3
+    uses: externpro/externpro/.github/workflows/build-macos.yml@25.07.6
     secrets: inherit
   windows:
-    uses: externpro/externpro/.github/workflows/build-windows.yml@25.07.3
+    uses: externpro/externpro/.github/workflows/build-windows.yml@25.07.6
     secrets: inherit
