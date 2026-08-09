@@ -14,11 +14,15 @@ jobs:
       contents: read
       pull-requests: write
       packages: write
-    uses: externpro/externpro/.github/workflows/build-linux.yml@25.07.6
-    secrets: inherit
+    uses: externpro/externpro/.github/workflows/build-linux.yml@26.01.4
+    secrets:
+      automation_token: ${{ secrets.GHCR_TOKEN }}
+    with: {}
   macos:
-    uses: externpro/externpro/.github/workflows/build-macos.yml@25.07.6
+    uses: externpro/externpro/.github/workflows/build-macos.yml@26.01.4
     secrets: inherit
+    with: {}
   windows:
-    uses: externpro/externpro/.github/workflows/build-windows.yml@25.07.6
+    uses: externpro/externpro/.github/workflows/build-windows.yml@26.01.4
     secrets: inherit
+    with: {}

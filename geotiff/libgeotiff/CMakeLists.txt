@@ -48,21 +48,20 @@ endif()
 target_include_directories(${lib_name} PUBLIC $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff
   )
-target_link_libraries(${lib_name} PUBLIC wx::wxtiff)
+target_link_libraries(${lib_name} PUBLIC wxWidgets::wxtiff)
 set_target_properties(${lib_name} PROPERTIES
   PREFIX "" # strip off the "lib" prefix, since it's already libgeotiff
   )
 #######################################
 set(targetsFile ${PROJECT_NAME}-targets)
-if(DEFINED XP_NAMESPACE)
-  xpExternPackage(NAMESPACE ${XP_NAMESPACE}
-    TARGETS_FILE ${targetsFile} LIBRARIES ${lib_name}
-    BASE ${GTIF_VER} XPDIFF "intro" DEPS wxwidgets
+if(COMMAND xpExternPackage)
+  xpExternPackage(TARGETS_FILE ${targetsFile}
+    LIBRARIES ${lib_name} DEFAULT_TARGETS ${lib_name}
+    BASE ${GTIF_VER} XPDIFF "intro"
     WEB "http://trac.osgeo.org/geotiff/ 'GeoTIFF trac website'" UPSTREAM "github.com/OSGeo/libgeotiff"
     DESC "georeferencing info embedded within TIFF file"
     LICENSE "[MIT](https://github.com/OSGeo/libgeotiff/blob/master/libgeotiff/LICENSE 'MIT License or public domain')"
     )
-  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
 elseif(NOT DEFINED CMAKE_INSTALL_CMAKEDIR)
   set(CMAKE_INSTALL_CMAKEDIR ${CMAKE_INSTALL_DATADIR}/cmake)
 endif()
@@ -76,4 +75,4 @@ file(GLOB incs ${CMAKE_CURRENT_SOURCE_DIR}/*.inc)
 install(FILES ${hdrs} ${incs} ${CMAKE_CURRENT_SOURCE_DIR}/libxtiff/xtiffio.h
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
   )
-install(EXPORT ${targetsFile} DESTINATION ${CMAKE_INSTALL_CMAKEDIR} ${nameSpace})
+install(EXPORT ${targetsFile} DESTINATION ${CMAKE_INSTALL_CMAKEDIR} NAMESPACE ${CMAKE_PROJECT_NAME}::)

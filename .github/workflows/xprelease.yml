@@ -34,7 +34,7 @@ jobs:
   # Upload build artifacts as release assets
   release-from-build:
     if: github.event_name == 'workflow_dispatch'
-    uses: externpro/externpro/.github/workflows/release-from-build.yml@25.07.6
+    uses: externpro/externpro/.github/workflows/release-from-build.yml@26.01.4
     with:
       workflow_run_url: ${{ github.event.inputs.workflow_run_url }}
     permissions:

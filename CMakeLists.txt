@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 3.31)
-set(CMAKE_PROJECT_TOP_LEVEL_INCLUDES .devcontainer/cmake/xproinc.cmake)
+cmake_minimum_required(VERSION 4.3)
 project(libgeotiff)
 # TRICKY: currently relies on tiff library from wxWidgets (wxtiff)...
-find_package(wxwidgets)
+find_package(wxWidgets)
 add_subdirectory(geotiff/libgeotiff)
