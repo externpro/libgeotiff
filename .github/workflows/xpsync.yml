@@ -1,0 +1,13 @@
+name: xpSync externpro
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+on:
+  workflow_dispatch:
+jobs:
+  sync:
+    uses: externpro/externpro/.github/workflows/sync-externpro.yml@main
+    secrets:
+      automation_token: ${{ secrets.XPRO_TOKEN }}
+    with: {}
